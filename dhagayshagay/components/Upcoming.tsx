@@ -3,7 +3,7 @@ import React from "react";
 
 const Upcoming = () => {
   return (
-    <div className="w-full max-w-[1340px] h-[500px] sm:h-[350px] lg:h-[700px] bg-white relative rounded-[20px] lg:rounded-[30px] overflow-hidden mx-auto mt-10">
+    <div className="w-full max-w-[1340px] h-[500px] sm:h-[35git pull origin main --allow-unrelated-histories0px] lg:h-[700px] bg-white relative rounded-[20px] lg:rounded-[30px] overflow-hidden mx-auto mt-10">
       {/* Background Image */}
       <Image
         src="/images/upcoming2.jpeg"
