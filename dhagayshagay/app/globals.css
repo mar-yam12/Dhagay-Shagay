@@ -1,6 +1,18 @@
 @import "tailwindcss";
 
 :root {
+<<<<<<< HEAD
+=======
+  --font-poppins: 'Poppins', sans-serif;
+}
+
+@theme {
+  --font-sans: var(--font-poppins);
+}
+
+/* 
+:root {
+>>>>>>> 0fda8690dab4afbaa8eb2b62c309f872ad96f71f
   --background: #ffffff;
   --foreground: #171717;
 }
@@ -23,4 +35,8 @@ body {
   background: var(--background);
   color: var(--foreground);
   font-family: Arial, Helvetica, sans-serif;
+<<<<<<< HEAD
 }
+=======
+} */
+>>>>>>> 0fda8690dab4afbaa8eb2b62c309f872ad96f71f
