@@ -1,28 +1,20 @@
-<<<<<<< HEAD
-import Image from "next/image";
+
 import AboutUs from "../components/AboutUs";
-import Link from "next/link";
+import NavBar from "../components/NavBar";
+import Hero from "../components/Hero";
+import Footer from "../components/Footer";
+import Trends from "../components/Trends";
+import Upcoming from "@/components/Upcoming";
 
 export default function Home() {
-  return (
-   <div>
-     <AboutUs/>
-   </div>
-=======
-import NavBar from "@/components/NavBar";
-import Hero from "@/components/Hero";
-import Footer from "@/components/Footer";
-import Trends from "@/components/Trends";
-
-export default function HomePage() {
   return (
     <>
       <NavBar />
       <Hero />
+      <AboutUs />
       <Trends />
+      <Upcoming />
       <Footer />
     </>
-
->>>>>>> 0fda8690dab4afbaa8eb2b62c309f872ad96f71f
   );
 }

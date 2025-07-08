@@ -2,9 +2,5 @@
   "version": 3,
   "sources": [],
   "sections": [
-<<<<<<< HEAD
-    {"offset": {"line": 12, "column": 0}, "map": {"version":3,"sources":["file:///C:/Users/RB%20Tech/Downloads/ecom%20proj/Dhagay-Shagay/dhagayshagay/app/favicon.ico.mjs%20%28structured%20image%20object%29"],"sourcesContent":["import src from \"IMAGE\";\nexport default { src, width: 256, height: 256 }\n"],"names":[],"mappings":";;;AAAA;;uCACe;IAAE,KAAA,uGAAA,CAAA,UAAG;IAAE,OAAO;IAAK,QAAQ;AAAI","debugId":null}}]
-=======
-    {"offset": {"line": 12, "column": 0}, "map": {"version":3,"sources":["file:///C:/Users/RB%20Tech/Downloads/Dhagay-Shagay/dhagayshagay/app/favicon.ico.mjs%20%28structured%20image%20object%29"],"sourcesContent":["import src from \"IMAGE\";\nexport default { src, width: 256, height: 256 }\n"],"names":[],"mappings":";;;AAAA;;uCACe;IAAE,KAAA,uGAAA,CAAA,UAAG;IAAE,OAAO;IAAK,QAAQ;AAAI","debugId":null}}]
->>>>>>> 92c9966 (Updated AboutUs Section)
+    {"offset": {"line": 12, "column": 0}, "map": {"version":3,"sources":["file:///C:/Users/Yousuf/Desktop/Dhagay-Shagay/dhagayshagay/app/favicon.ico.mjs%20%28structured%20image%20object%29"],"sourcesContent":["import src from \"IMAGE\";\nexport default { src, width: 256, height: 256 }\n"],"names":[],"mappings":";;;AAAA;;uCACe;IAAE,KAAA,uGAAA,CAAA,UAAG;IAAE,OAAO;IAAK,QAAQ;AAAI","debugId":null}}]
 }
