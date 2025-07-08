@@ -7,7 +7,7 @@ import women from "../public/images/women.jpg";
 
 export const AboutUs = () => {
   return (
-    <div className="bg-white min-h-screen px-6 pt-28">
+    <div className="bg-white min-h-screen px-6 pt-28 md:px-20 lg:px-40 flex flex-col items-center justify-center">
       {/* Heading Row */}
       <div className="flex flex-col md:flex-row items-center justify-center gap-6 md:gap-20 mb-12">
         <h1 className="text-black font-medium text-xl">About Us</h1>
@@ -18,9 +18,9 @@ export const AboutUs = () => {
 
       {/* Images Row */}
       <div className="flex flex-col md:flex-row items-center justify-center gap-10">
-        <Image className="" src={man} alt="mans" width={300} height={300} />
+        <Image className="" src={man} alt="mans" width={500} height={500} />
 
-        <Image className="" src={women} alt="womens" width={300} height={300} />
+        <Image className="" src={women} alt="womens" width={500} height={500} />
       </div>
       <div className="flex flex-col items-center justify-center pt-10 ">
         <button className="w-[200px] h-[60px] bg-[#131313]  text-white hover:bg-gray-800 rounded-full text-sm font-semibold tracking-wide flex items-center justify-between px-6 transition group cursor-pointer">

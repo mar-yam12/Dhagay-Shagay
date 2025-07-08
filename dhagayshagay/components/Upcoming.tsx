@@ -1,16 +1,20 @@
-import Image from "next/image";
+
 import React from "react";
 
 const Upcoming = () => {
   return (
-    <div className="w-full max-w-[1340px] h-[500px] sm:h-[35git pull origin main --allow-unrelated-histories0px] lg:h-[700px] bg-white relative rounded-[20px] lg:rounded-[30px] overflow-hidden mx-auto mt-10">
-      {/* Background Image */}
-      <Image
-        src="/images/upcoming2.jpeg"
-        alt="upcoming image"
-        fill
-        className="object-cover"
-      />
+    <div className="w-full max-w-[1340px] h-[300px] sm:h-[35git pull origin main --allow-unrelated-histories0px] lg:h-[600px] bg-white relative rounded-[20px] lg:rounded-[30px] overflow-hidden mx-auto mt-10 mb-10">
+      {/* Background Video */}
+      <div className="absolute inset-0">
+        <video
+          autoPlay
+          loop
+          muted
+          className="w-full h-full object-cover contrast-110 brightness-105"
+          src="/images/upcoming.mp4"
+        ></video>
+        <div className="absolute inset-0 bg-black opacity-50" />
+      </div>
 
       {/* Overlay Content */}
       <div className="absolute inset-0 flex flex-col justify-start p-4 sm:p-6 gap-4 sm:gap-6">
