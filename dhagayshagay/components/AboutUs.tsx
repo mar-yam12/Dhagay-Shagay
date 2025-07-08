@@ -1,9 +1,9 @@
 import React from "react";
-import Link from "next/link";
+
 import Image from "next/image";
 import man from "../public/images/man.jpg";
 import women from "../public/images/women.jpg";
-import button from "../public/images/button.jpg";
+
 
 export const AboutUs = () => {
   return (
