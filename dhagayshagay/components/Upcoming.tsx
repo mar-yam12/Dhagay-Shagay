@@ -11,7 +11,7 @@ const Upcoming = () => {
           loop
           muted
           className="w-full h-full object-cover contrast-110 brightness-105"
-          src="/images/upcoming.mp4"
+          src="/images/upcoming.MP4"
         ></video>
         <div className="absolute inset-0 bg-black opacity-50" />
       </div>
