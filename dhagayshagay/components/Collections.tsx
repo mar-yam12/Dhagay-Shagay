@@ -105,9 +105,9 @@ const Collections = () => {
   const totalPages = Math.ceil(products.length / productsPerPage);
 
   // Get current products for the page
-  const indexOfLastProduct = currentPage * productsPerPage;
-  const indexOfFirstProduct = indexOfLastProduct - productsPerPage;
-  const currentProducts = products.slice(indexOfFirstProduct, indexOfLastProduct);
+  // const indexOfLastProduct = currentPage * productsPerPage;
+  // const indexOfFirstProduct = indexOfLastProduct - productsPerPage;
+  // const currentProducts = products.slice(indexOfFirstProduct, indexOfLastProduct);
 
   const handlePageChange = (page: number) => {
     setCurrentPage(page);
