@@ -1,4 +1,4 @@
-import { title } from "process";
+
 
 export default {
     name: 'product',
@@ -36,11 +36,11 @@ export default {
         type: 'array',
         of: [{ type: 'string' }],
       },
-      {
-        name: 'style',
-        type: 'reference',
-        to: [{ type: 'style' }],
-      },
+      // {
+      //   name: 'style',
+      //   type: 'reference',
+      //   to: [{ type: 'style' }],
+      // },
       {
         name:'rating',
         type:'number',
