@@ -1,7 +1,10 @@
 import { type SchemaTypeDefinition } from 'sanity'
-import {postType} from './postType'
+import product from './product'
+import order from './order'
+import customer from './customer'
+import review from './review'
+import shipment from './shipment'
 
 export const schema: { types: SchemaTypeDefinition[] } = {
-  types: [],
+  types: [product, order, customer, review, shipment],
 }
-export const schemaTypes = [postType]
