@@ -1,10 +1,11 @@
 'use client';
 
-import { client } from "@/lib/sanity";
-import Image from "next/image";
-import { useCart } from "@/context/cart";
-import { useState, useEffect } from "react";
-import { motion } from "framer-motion";
+import { useParams } from 'next/navigation';
+import { useEffect, useState } from 'react';
+import { client } from '@/lib/sanity';
+import Image from 'next/image';
+import { useCart } from '@/context/cart';
+import { motion } from 'framer-motion';
 
 interface ProductDetail {
   _id: string;
@@ -58,32 +59,29 @@ async function getRelatedProducts(slug: string, category: string): Promise<Relat
   return await client.fetch(query, { slug, category });
 }
 
-// ✅ FIXED TYPE
-type Props = {
-  params: {
-    slug: string;
-  };
-};
+export default function ProductPage() {
+  const params = useParams();
+  const slug = params?.slug as string;
 
-export default function ProductPage({ params }: Props) {
   const [product, setProduct] = useState<ProductDetail | null>(null);
   const [related, setRelated] = useState<RelatedProduct[]>([]);
-  const [selectedSize, setSelectedSize] = useState("");
-  const [selectedColor, setSelectedColor] = useState("");
+  const [selectedSize, setSelectedSize] = useState('');
+  const [selectedColor, setSelectedColor] = useState('');
   const { addToCart } = useCart();
 
   useEffect(() => {
-    getProduct(params.slug).then((p) => {
+    if (!slug) return;
+    getProduct(slug).then((p) => {
       setProduct(p);
       if (p) getRelatedProducts(p.slug.current, p.category).then(setRelated);
     });
-  }, [params.slug]);
+  }, [slug]);
 
   if (!product) return <p className="p-6">Loading...</p>;
 
   const handleAddToCart = () => {
     if (!selectedSize || !selectedColor) {
-      alert("Please select size and color");
+      alert('Please select size and color');
       return;
     }
 
@@ -95,7 +93,7 @@ export default function ProductPage({ params }: Props) {
       quantity: 1,
     });
 
-    alert("🛒 Product added to cart!");
+    alert('🛒 Product added to cart!');
   };
 
   return (
@@ -149,8 +147,8 @@ export default function ProductPage({ params }: Props) {
                 onClick={() => setSelectedSize(size)}
                 className={`px-4 py-1 rounded border transition ${
                   selectedSize === size
-                    ? "bg-black text-white"
-                    : "hover:bg-gray-100"
+                    ? 'bg-black text-white'
+                    : 'hover:bg-gray-100'
                 }`}
               >
                 {size}
@@ -174,8 +172,8 @@ export default function ProductPage({ params }: Props) {
                 onClick={() => setSelectedColor(color)}
                 className={`px-4 py-1 rounded border transition ${
                   selectedColor === color
-                    ? "bg-black text-white"
-                    : "hover:bg-gray-100"
+                    ? 'bg-black text-white'
+                    : 'hover:bg-gray-100'
                 }`}
               >
                 {color}
@@ -184,7 +182,7 @@ export default function ProductPage({ params }: Props) {
           </div>
         </motion.div>
 
-        {/* Cart + Wishlist */}
+        {/* Add to Cart + Wishlist */}
         <motion.div
           className="flex gap-4 items-center mt-6"
           initial={{ opacity: 0 }}
@@ -199,12 +197,11 @@ export default function ProductPage({ params }: Props) {
             Add to Cart
           </motion.button>
 
-          {/* Wishlist Button */}
           <motion.button
             whileTap={{ scale: 0.9 }}
             whileHover={{ scale: 1.1 }}
             className="w-10 h-10 rounded-full border text-red-500 border-red-500 hover:bg-red-500 hover:text-white transition"
-            onClick={() => alert("❤️ Added to wishlist!")}
+            onClick={() => alert('❤️ Added to wishlist!')}
           >
             ❤️
           </motion.button>
