@@ -12,7 +12,7 @@ export default function AboutPage() {
           </p>
 
           <p className="text-gray-700 mb-4 leading-relaxed">
-              Whether you’re looking for casual everyday wear, stunning Eid outfits, or statement pieces for winter or summer collections, our curated
+              Whether you are looking for casual everyday wear, stunning Eid outfits, or statement pieces for winter or summer collections, our curated
               fashion lines bring together tradition and modern aesthetics — all in one place.
           </p>
 
@@ -22,7 +22,7 @@ export default function AboutPage() {
           </p>
 
           <p className="text-gray-700 leading-relaxed">
-              Thank you for being a part of our journey. Let's celebrate fashion, culture, and craftsmanship together.
+              Thank you for being a part of our journey. Lets celebrate fashion, culture, and craftsmanship together.
           </p>
       </div></>
   );

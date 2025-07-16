@@ -25,7 +25,7 @@ export default function CheckoutPage() {
       await client.create(order);
       setSubmitted(true);
       clearCart();
-    } catch (error) {
+    } catch (e) {
       alert("❌ Failed to place order.");
     }
   };

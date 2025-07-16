@@ -6,7 +6,7 @@ import Image from 'next/image';
 export default function CartPage() {
   const { cart, removeFromCart, clearCart, increaseQty, decreaseQty } = useCart();
 
-  const total = cart.reduce((acc: any, item : any) => acc + item.price * item.quantity, 0);
+  const total = cart.reduce((acc, item ) => acc + item.price * item.quantity, 0);
 
   return (
     <div className="p-6">
@@ -17,7 +17,7 @@ export default function CartPage() {
       ) : (
         <>
           <ul className="space-y-4">
-            {cart.map((item: any) => (
+            {cart.map((item) => (
               <li key={item._id} className="flex items-center justify-between border p-4 rounded">
                 <div className="flex items-center gap-4">
                   <Image src={item.image} alt={item.name} width={60} height={60} className="rounded" />
