@@ -58,7 +58,14 @@ async function getRelatedProducts(slug: string, category: string): Promise<Relat
   return await client.fetch(query, { slug, category });
 }
 
-export default function ProductPage({ params }: { params: { slug: string } }) {
+// ✅ FIXED TYPE
+type Props = {
+  params: {
+    slug: string;
+  };
+};
+
+export default function ProductPage({ params }: Props) {
   const [product, setProduct] = useState<ProductDetail | null>(null);
   const [related, setRelated] = useState<RelatedProduct[]>([]);
   const [selectedSize, setSelectedSize] = useState("");
