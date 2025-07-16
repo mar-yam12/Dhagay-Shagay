@@ -1,10 +1,6 @@
-import React from "react";
+// app/collections/page.tsx
+import { redirect } from 'next/navigation';
 
-export default function AboutPage() {
-    return (
-        <div>
-            <h1>About Page</h1>
-            <p>Yeh ek basic About page hai.</p>
-        </div>
-    );
+export default function CollectionsRedirect() {
+  redirect('/collections/all');
 }

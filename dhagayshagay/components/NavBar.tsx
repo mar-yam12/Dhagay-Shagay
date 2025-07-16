@@ -26,8 +26,8 @@ export default function Navbar() {
                         </Link>
                     </li>
                     <li>
-                        <Link href="/faq" className="hover:text-[#C5F302] transition-colors duration-300 hover:underline cursor-pointer">
-                            FAQ
+                        <Link href="/contact" className="hover:text-[#C5F302] transition-colors duration-300 hover:underline cursor-pointer">
+                            Contact Us
                         </Link>
                     </li>
                 </ul>
