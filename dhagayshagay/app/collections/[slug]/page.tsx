@@ -1,10 +1,10 @@
-// app/collections/[slug]/page.tsx
 'use client';
 
 import { client } from "@/lib/sanity";
 import Image from "next/image";
 import { useCart } from "@/context/cart";
 import { useState, useEffect } from "react";
+import { motion } from "framer-motion";
 
 interface ProductDetail {
   _id: string;
@@ -18,6 +18,15 @@ interface ProductDetail {
   colors: string[];
   rating: number;
   ratingCount: number;
+  category: string;
+}
+
+interface RelatedProduct {
+  _id: string;
+  name: string;
+  slug: { current: string };
+  image: { asset: { url: string } };
+  price: number;
 }
 
 async function getProduct(slug: string): Promise<ProductDetail> {
@@ -32,19 +41,35 @@ async function getProduct(slug: string): Promise<ProductDetail> {
     sizes,
     colors,
     rating,
-    ratingCount
+    ratingCount,
+    category
   }`;
   return await client.fetch(query, { slug });
 }
 
+async function getRelatedProducts(slug: string, category: string): Promise<RelatedProduct[]> {
+  const query = `*[_type == "product" && slug.current != $slug && category == $category][0...3]{
+    _id,
+    name,
+    slug,
+    image{ asset->{url} },
+    price
+  }`;
+  return await client.fetch(query, { slug, category });
+}
+
 export default function ProductPage({ params }: { params: { slug: string } }) {
   const [product, setProduct] = useState<ProductDetail | null>(null);
+  const [related, setRelated] = useState<RelatedProduct[]>([]);
   const [selectedSize, setSelectedSize] = useState("");
   const [selectedColor, setSelectedColor] = useState("");
   const { addToCart } = useCart();
 
   useEffect(() => {
-    getProduct(params.slug).then(setProduct);
+    getProduct(params.slug).then((p) => {
+      setProduct(p);
+      if (p) getRelatedProducts(p.slug.current, p.category).then(setRelated);
+    });
   }, [params.slug]);
 
   if (!product) return <p className="p-6">Loading...</p>;
@@ -67,66 +92,153 @@ export default function ProductPage({ params }: { params: { slug: string } }) {
   };
 
   return (
-    <div className="p-6 max-w-4xl mx-auto">
-      <Image
-        src={product.image.asset.url}
-        alt={product.name}
-        width={500}
-        height={500}
-        className="rounded-xl object-cover"
-      />
+    <motion.div
+      className="p-6 max-w-6xl mx-auto grid md:grid-cols-2 gap-10"
+      initial={{ opacity: 0, y: 50 }}
+      animate={{ opacity: 1, y: 0 }}
+      transition={{ duration: 0.5 }}
+    >
+      {/* Product Image */}
+      <motion.div
+        className="w-full h-auto overflow-hidden rounded-xl shadow-lg"
+        whileHover={{ scale: 1.02 }}
+      >
+        <Image
+          src={product.image.asset.url}
+          alt={product.name}
+          width={600}
+          height={600}
+          className="object-cover rounded-xl w-full"
+        />
+      </motion.div>
 
-      <h1 className="text-3xl font-bold mt-4">{product.name}</h1>
-      <p className="text-xl text-green-600 mt-1">Rs. {product.price}</p>
-      <p className="text-gray-500 line-through">Rs. {product.priceWithoutDiscount}</p>
-      <p className="mt-4">{product.description}</p>
+      {/* Product Details */}
+      <div className="flex flex-col justify-center space-y-4">
+        <h1 className="text-3xl font-bold">{product.name}</h1>
 
-      <div className="mt-4">
-        <h4 className="font-medium">Sizes:</h4>
-        <div className="flex gap-2 mt-1">
-          {product.sizes.map((size, i) => (
-            <button
-              key={i}
-              onClick={() => setSelectedSize(size)}
-              className={`px-3 py-1 border rounded ${
-                selectedSize === size ? "bg-black text-white" : ""
-              }`}
-            >
-              {size}
-            </button>
-          ))}
+        <div className="text-xl text-green-600 font-semibold">
+          Rs. {product.price}
+          {product.priceWithoutDiscount > product.price && (
+            <span className="ml-3 text-sm line-through text-gray-500">
+              Rs. {product.priceWithoutDiscount}
+            </span>
+          )}
         </div>
-      </div>
 
-      <div className="mt-4">
-        <h4 className="font-medium">Colors:</h4>
-        <div className="flex gap-2 mt-1">
-          {product.colors.map((color, i) => (
-            <button
-              key={i}
-              onClick={() => setSelectedColor(color)}
-              className={`px-3 py-1 border rounded ${
-                selectedColor === color ? "bg-black text-white" : ""
-              }`}
-            >
-              {color}
-            </button>
-          ))}
-        </div>
-      </div>
+        <p className="text-gray-700 leading-relaxed">{product.description}</p>
 
-      <div className="mt-6">
-        <button
-          onClick={handleAddToCart}
-          className="bg-green-600 hover:bg-green-700 text-white px-6 py-2 rounded"
+        {/* Sizes */}
+        <motion.div
+          className="mt-2"
+          initial={{ opacity: 0, y: 20 }}
+          whileInView={{ opacity: 1, y: 0 }}
+          viewport={{ once: true }}
         >
-          Add to Cart
-        </button>
+          <h4 className="font-medium mb-2">Select Size:</h4>
+          <div className="flex gap-2 flex-wrap">
+            {product.sizes.map((size, i) => (
+              <button
+                key={i}
+                onClick={() => setSelectedSize(size)}
+                className={`px-4 py-1 rounded border transition ${
+                  selectedSize === size
+                    ? "bg-black text-white"
+                    : "hover:bg-gray-100"
+                }`}
+              >
+                {size}
+              </button>
+            ))}
+          </div>
+        </motion.div>
+
+        {/* Colors */}
+        <motion.div
+          className="mt-4"
+          initial={{ opacity: 0, y: 20 }}
+          whileInView={{ opacity: 1, y: 0 }}
+          viewport={{ once: true }}
+        >
+          <h4 className="font-medium mb-2">Select Color:</h4>
+          <div className="flex gap-2 flex-wrap">
+            {product.colors.map((color, i) => (
+              <button
+                key={i}
+                onClick={() => setSelectedColor(color)}
+                className={`px-4 py-1 rounded border transition ${
+                  selectedColor === color
+                    ? "bg-black text-white"
+                    : "hover:bg-gray-100"
+                }`}
+              >
+                {color}
+              </button>
+            ))}
+          </div>
+        </motion.div>
+
+        {/* Cart + Wishlist */}
+        <motion.div
+          className="flex gap-4 items-center mt-6"
+          initial={{ opacity: 0 }}
+          whileInView={{ opacity: 1 }}
+          transition={{ delay: 0.3 }}
+        >
+          <motion.button
+            onClick={handleAddToCart}
+            className="flex-1 bg-green-600 hover:bg-green-700 text-white font-medium py-3 rounded-lg shadow-md"
+            whileTap={{ scale: 0.95 }}
+          >
+            Add to Cart
+          </motion.button>
+
+          {/* Wishlist Button */}
+          <motion.button
+            whileTap={{ scale: 0.9 }}
+            whileHover={{ scale: 1.1 }}
+            className="w-10 h-10 rounded-full border text-red-500 border-red-500 hover:bg-red-500 hover:text-white transition"
+            onClick={() => alert("❤️ Added to wishlist!")}
+          >
+            ❤️
+          </motion.button>
+        </motion.div>
+
+        <div className="text-sm text-gray-500 mt-2">
+          ⭐ {product.rating} ({product.ratingCount} ratings)
+        </div>
       </div>
 
-      <div className="mt-4 text-sm text-gray-600">
-        ⭐ {product.rating} ({product.ratingCount} ratings)
-      </div>
-    </div>
+      {/* Related Products */}
+      {related.length > 0 && (
+        <motion.div
+          className="md:col-span-2 mt-16"
+          initial={{ opacity: 0, y: 30 }}
+          whileInView={{ opacity: 1, y: 0 }}
+          viewport={{ once: true }}
+          transition={{ duration: 0.6 }}
+        >
+          <h2 className="text-2xl font-bold mb-4">You may also like</h2>
+          <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-6">
+            {related.map((item) => (
+              <motion.div
+                key={item._id}
+                whileHover={{ scale: 1.02 }}
+                className="border rounded-lg p-4 hover:shadow-md transition"
+              >
+                <Image
+                  src={item.image.asset.url}
+                  alt={item.name}
+                  width={300}
+                  height={300}
+                  className="rounded w-full h-[250px] object-cover"
+                />
+                <h3 className="font-semibold mt-2">{item.name}</h3>
+                <p className="text-sm text-gray-600">Rs. {item.price}</p>
+              </motion.div>
+            ))}
+          </div>
+        </motion.div>
+      )}
+    </motion.div>
   );
 }
