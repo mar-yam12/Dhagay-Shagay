@@ -3,6 +3,7 @@
 import { useEffect, useState } from 'react';
 import { client } from '@/lib/sanity';
 import Image from 'next/image';
+import Link from 'next/link';
 import { AnimatePresence, motion } from 'framer-motion';
 import { FaFilter } from 'react-icons/fa';
 
@@ -29,17 +30,16 @@ export default function AllProductsPage() {
     maxPrice: 10000,
   });
 
-  const fetchProducts = async () => {
-    const query = `*[_type == "product"]{
-      _id, name, slug, price, priceWithoutDiscount, category, colors, sizes, isNew,
-      image { asset->{url} }
-    }`;
-    const data = await client.fetch(query);
-    setProducts(data);
-    setFiltered(data);
-  };
-
   useEffect(() => {
+    const fetchProducts = async () => {
+      const query = `*[_type == "product"]{
+        _id, name, slug, price, priceWithoutDiscount, category, colors, sizes, isNew,
+        image { asset->{url} }
+      }`;
+      const data = await client.fetch(query);
+      setProducts(data);
+      setFiltered(data);
+    };
     fetchProducts();
   }, []);
 
@@ -55,7 +55,6 @@ export default function AllProductsPage() {
     setFiltered(result);
   }, [filters, products]);
 
-  // Extract unique filters
   const categories = [...new Set(products.map((p) => p.category))];
   const allSizes = [...new Set(products.flatMap((p) => p.sizes))];
   const allColors = [...new Set(products.flatMap((p) => p.colors))];
@@ -69,9 +68,7 @@ export default function AllProductsPage() {
         </h2>
 
         <button
-          onClick={() =>
-            setFilters({ category: '', size: '', color: '', maxPrice: 10000 })
-          }
+          onClick={() => setFilters({ category: '', size: '', color: '', maxPrice: 10000 })}
           className="text-sm text-gray-700 bg-gray-100 px-3 py-1 rounded hover:bg-gray-200 transition"
         >
           🔄 All Products
@@ -160,25 +157,27 @@ export default function AllProductsPage() {
                 animate={{ opacity: 1, y: 0 }}
                 exit={{ opacity: 0, y: 20 }}
                 transition={{ duration: 0.3 }}
-                className="border p-4 rounded-lg shadow hover:shadow-md bg-white"
               >
-                <Image
-                  src={product.image.asset.url}
-                  alt={product.name}
-                  width={300}
-                  height={300}
-                  className="rounded object-cover w-full h-[250px]"
-                />
-                <div className="mt-2 space-y-1">
-                  <h3 className="font-semibold text-lg">{product.name}</h3>
-                  <p className="text-gray-700">Rs. {product.price}</p>
-                  <p className="text-sm text-gray-500 capitalize">
-                    {product.category}
-                  </p>
-                  {product.isNew && (
-                    <span className="text-green-500 text-xs">New Arrival</span>
-                  )}
-                </div>
+                <Link
+                  href={`/collections/${product.slug.current}`}
+                  className="block border p-4 rounded-lg shadow hover:shadow-md bg-white transition hover:scale-[1.02]"
+                >
+                  <Image
+                    src={product.image.asset.url}
+                    alt={product.name}
+                    width={300}
+                    height={300}
+                    className="rounded object-cover w-full h-[250px]"
+                  />
+                  <div className="mt-2 space-y-1">
+                    <h3 className="font-semibold text-lg">{product.name}</h3>
+                    <p className="text-gray-700">Rs. {product.price}</p>
+                    <p className="text-sm text-gray-500 capitalize">{product.category}</p>
+                    {product.isNew && (
+                      <span className="text-green-500 text-xs">New Arrival</span>
+                    )}
+                  </div>
+                </Link>
               </motion.div>
             ))
           ) : (
