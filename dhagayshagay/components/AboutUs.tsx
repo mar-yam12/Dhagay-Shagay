@@ -7,7 +7,7 @@ import women from "../public/images/women.jpg";
 
 export const AboutUs = () => {
   return (
-    <div className="bg-white min-h-screen px-6 pt-28 md:px-20 lg:px-40 flex flex-col items-center justify-center">
+    <div className="bg-white min-h-screen px-6 pt-28 md:px-20 lg:px-40 flex flex-col items-center justify-center mb-8">
       {/* Heading Row */}
       <div className="flex flex-col md:flex-row items-center justify-center gap-6 md:gap-20 mb-12">
         <h1 className="text-black font-medium text-xl">About Us</h1>
