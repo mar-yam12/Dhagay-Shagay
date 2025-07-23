@@ -1,9 +1,0 @@
-{
-<<<<<<< HEAD
-  "/about/page": "app/about/page.js",
-=======
-  "/collections/[slug]/page": "app/collections/[slug]/page.js",
-  "/collections/page": "app/collections/page.js",
->>>>>>> 9931d4a09dea566f84ec215bfee22523ac95a6ca
-  "/favicon.ico/route": "app/favicon.ico/route.js"
-}
