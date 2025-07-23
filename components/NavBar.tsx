@@ -3,7 +3,7 @@ import Image from 'next/image';
 import React, { useState } from "react";
 import Link from "next/link";
 import { FiMenu, FiX } from "react-icons/fi";
-import { Menu, ShoppingCart, X, Search, User } from 'lucide-react';
+import {  ShoppingCart, Search, User } from 'lucide-react';
 
 const Navbar = () => {
   const [isMenuOpen, setIsMenuOpen] = useState(false);

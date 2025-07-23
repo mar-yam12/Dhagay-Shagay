@@ -1,4 +1,4 @@
-import Hero from "@/components/Hero";
+
 import Image from "next/image";
 
 export default function AboutPage() {
@@ -47,7 +47,7 @@ export default function AboutPage() {
               Our Story
             </h2>
             <p className="text-gray-600 leading-relaxed">
-              Founded by passionate local creatives, we're committed to making 
+              Founded by passionate local creatives, we are committed to making 
               premium fashion accessible while supporting regional artisans. 
               Each garment tells a story of craftsmanship and cultural pride.
             </p>
@@ -74,7 +74,7 @@ export default function AboutPage() {
             <span className="text-lime-400">Join</span> Our Fashion Journey
           </h2>
           <p className="text-gray-300 max-w-2xl mx-auto leading-relaxed mb-6">
-            Thank you for being part of our story. Together, let's celebrate the 
+            Thank you for being part of our story. Together, lets celebrate the 
             vibrant intersection of fashion, culture, and craftsmanship.
           </p>
           <button className="bg-lime-400 hover:bg-white text-black font-medium py-3 px-8 rounded-full transition duration-300">

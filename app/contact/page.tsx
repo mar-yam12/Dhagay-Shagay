@@ -25,7 +25,7 @@ export default function ContactPage() {
         <div className="text-center mb-12">
           <h1 className="text-4xl font-bold text-gray-900 mb-3">Contact Us</h1>
           <p className="text-lg text-gray-600 max-w-2xl mx-auto">
-            Have questions or want to collaborate? We'd love to hear from you.
+            Have questions or want to collaborate? We d love to hear from you.
           </p>
         </div>
 
@@ -33,7 +33,7 @@ export default function ContactPage() {
           <div className="md:flex">
             {/* Left Side - Company Contact Info */}
             <div className="md:w-2/5 bg-gradient-to-br from-green-600 to-green-800 p-10 text-white">
-              <h2 className="text-3xl font-bold mb-8">Let's talk</h2>
+              <h2 className="text-3xl font-bold mb-8">Lets talk</h2>
               
               <div className="space-y-8">
                 <div className="flex items-start">
@@ -113,7 +113,7 @@ export default function ContactPage() {
                     </svg>
                   </div>
                   <h3 className="text-lg font-medium text-gray-900 mb-2">Message sent successfully!</h3>
-                  <p className="text-gray-600">Thank you for contacting us. We'll get back to you soon.</p>
+                  <p className="text-gray-600">Thank you for contacting us. We will get back to you soon.</p>
                   <button
                     onClick={() => setSubmitted(false)}
                     className="mt-4 px-4 py-2 bg-green-600 text-white rounded-md hover:bg-green-700 transition-colors"
